@@ -41,6 +41,7 @@ def to_usd(my_price):
 
 # create variable to hold total price
 total_price = 0
+selected_ids = []
 
 # ask the user for a product identifier
 while True:
@@ -49,10 +50,21 @@ while True:
     if selected_id.upper() == "DONE":
         break
     else:
-    # look up information about the product with the given identifier
-        matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
-        matching_product = matching_products[0]
-        total_price = total_price + matching_product["price"]
-        print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
+    # look up information about the product with the given identifiers
+        #matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
+        #matching_product = matching_products[0]
+        #total_price = total_price + matching_product["price"]
+        #print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
+        selected_ids.append(selected_id)
+
+
+
+# print(selected_ids)
+
+for selected_id in selected_ids:
+    matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
+    matching_product = matching_products[0]
+    total_price = total_price + matching_product["price"]
+    print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
 
 print("TOTAL PRICE:", str(total_price))
