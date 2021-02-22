@@ -40,9 +40,12 @@ def to_usd(my_price):
 # TODO: write some Python code here to produce the desired output
 
 # ask the user for a product identifier
-selected_id = input("Please input a product identifier (1-20):")
-selected_id = int(selected_id)
+while True:
+    selected_id = input("Please input a product identifier or 'DONE' if there are no more items (1-20):")
+    if selected_id == "DONE":
+        break
 
-# look up information about the product with the given identifier
-matching_products = [item for item in products if item["id"] == selected_id]
-print(matching_products)
+    # look up information about the product with the given identifier
+    matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
+matching_product = matching_products[0]
+print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
