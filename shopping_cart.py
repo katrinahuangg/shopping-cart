@@ -57,16 +57,19 @@ while True:
     # break loop if user input is 'DONE'
     if selected_id.upper() == "DONE":
         break
+    # validate other entries
     else:
         if selected_id not in valid_ids:
             print("Sorry, the product identifier you have entered is not valid. Please try again.")
         else:
+            # add selected id to list if valid
             selected_ids.append(selected_id)
 
 # print top of receipt
 print(line)
 print("SHOPRITE GROCERY")
 print("SHOP.SHOPRITE.COM")
+print("1 (800) 746-7748")
 print(line)
 
 # get and print time and date
@@ -76,6 +79,11 @@ current_datetime = now.strftime("%m/%d/%Y %I:%M %p")
 print("CHECKOUT AT:", current_datetime)
 print(line)
 
+if len(selected_ids) == 0:
+    print("SORRY, YOU HAVE NOT SELECTED ANY PRODUCTS.")
+    print(line)
+    quit()
+
 # look up information about the product with the given identifiers and print line by line
 print("SELECTED PRODUCTS:")
 for selected_id in selected_ids:
@@ -84,6 +92,7 @@ for selected_id in selected_ids:
     subtotal_price = subtotal_price + matching_product["price"]
     print("+", str(matching_product["name"]), to_usd(matching_product["price"]))
 
+# calculate tax and totals
 tax = tax_rate * subtotal_price
 total_price = subtotal_price + tax
 
