@@ -39,9 +39,17 @@ def to_usd(my_price):
 
 # TODO: write some Python code here to produce the desired output
 
-# create variable to hold total price
-total_price = 0
+# create variable to hold subtotal price
+subtotal_price = 0
+# create variable to hold selected ids
 selected_ids = []
+# create variable to check selected id conditions
+valid_ids = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20"]
+# tax rate
+tax_rate = 0.0875
+# string to hold line to be printed
+line = "------------------------"
+
 
 # ask the user for a product identifier
 while True:
@@ -50,21 +58,25 @@ while True:
     if selected_id.upper() == "DONE":
         break
     else:
-    # look up information about the product with the given identifiers
-        #matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
-        #matching_product = matching_products[0]
-        #total_price = total_price + matching_product["price"]
-        #print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
-        selected_ids.append(selected_id)
+        if selected_id not in valid_ids:
+            print("Sorry, the product identifier you have entered is not valid. Please try again.")
+        else:
+            selected_ids.append(selected_id)
 
-
-
-# print(selected_ids)
-
+# look up information about the product with the given identifiers
 for selected_id in selected_ids:
     matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
     matching_product = matching_products[0]
-    total_price = total_price + matching_product["price"]
-    print("SELECTED PRODUCT:", str(matching_product["name"]), str(matching_product["price"]))
+    subtotal_price = subtotal_price + matching_product["price"]
+    print("+", str(matching_product["name"]), str(matching_product["price"]))
 
-print("TOTAL PRICE:", str(total_price))
+tax = tax_rate * subtotal_price
+total_price = subtotal_price + tax
+
+
+print(line)
+print("SHOPRITE GROCERY")
+print("SHOP.SHOPRITE.COM")
+print("SUBTOTAL:", to_usd(subtotal_price))
+print("TAX:", to_usd(tax))
+print("TOTAL:", to_usd(total_price))
