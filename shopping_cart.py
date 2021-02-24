@@ -63,20 +63,37 @@ while True:
         else:
             selected_ids.append(selected_id)
 
-# look up information about the product with the given identifiers
+# print top of receipt
+print(line)
+print("SHOPRITE GROCERY")
+print("SHOP.SHOPRITE.COM")
+print(line)
+
+# get and print time and date
+from datetime import datetime
+now = datetime.now()
+current_datetime = now.strftime("%m/%d/%Y %I:%M %p")
+print("CHECKOUT AT:", current_datetime)
+print(line)
+
+# look up information about the product with the given identifiers and print line by line
+print("SELECTED PRODUCTS:")
 for selected_id in selected_ids:
     matching_products = [item for item in products if str(item["id"]) == str(selected_id)]
     matching_product = matching_products[0]
     subtotal_price = subtotal_price + matching_product["price"]
-    print("+", str(matching_product["name"]), str(matching_product["price"]))
+    print("+", str(matching_product["name"]), to_usd(matching_product["price"]))
 
 tax = tax_rate * subtotal_price
 total_price = subtotal_price + tax
 
-
+# print totals
 print(line)
-print("SHOPRITE GROCERY")
-print("SHOP.SHOPRITE.COM")
 print("SUBTOTAL:", to_usd(subtotal_price))
 print("TAX:", to_usd(tax))
 print("TOTAL:", to_usd(total_price))
+
+# print goodbye message
+print(line)
+print("THANK YOU! SEE YOU AGAIN SOON!")
+print(line)
