@@ -50,7 +50,6 @@ tax_rate = 0.0875
 # string to hold line to be printed
 line = "------------------------"
 
-
 # ask the user for a product identifier
 while True:
     selected_id = input("Please input a product identifier or 'DONE' if there are no more items (1-20):")
@@ -79,6 +78,7 @@ current_datetime = now.strftime("%m/%d/%Y %I:%M %p")
 print("CHECKOUT AT:", current_datetime)
 print(line)
 
+# quit script if no products are selected
 if len(selected_ids) == 0:
     print("SORRY, YOU HAVE NOT SELECTED ANY PRODUCTS.")
     print(line)
